@@ -15,25 +15,42 @@ function ScrollToTop() {
   return null
 }
 
-// Intersection Observer for scroll animations
+// Intersection Observer for scroll animations — watches for new .reveal elements via MutationObserver
 function useRevealOnScroll() {
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+            io.unobserve(entry.target)
           }
         })
       },
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     )
 
-    const revealElements = document.querySelectorAll('.reveal')
-    revealElements.forEach((el) => observer.observe(el))
+    const observe = (el) => {
+      if (!el.classList.contains('visible')) io.observe(el)
+    }
 
-    return () => observer.disconnect()
-  })
+    // Observe existing elements
+    document.querySelectorAll('.reveal').forEach(observe)
+
+    // Watch for new .reveal elements added to the DOM (e.g. route changes)
+    const mo = new MutationObserver((mutations) => {
+      mutations.forEach((m) => {
+        m.addedNodes.forEach((node) => {
+          if (node.nodeType !== 1) return
+          if (node.classList?.contains('reveal')) observe(node)
+          node.querySelectorAll?.('.reveal').forEach(observe)
+        })
+      })
+    })
+    mo.observe(document.body, { childList: true, subtree: true })
+
+    return () => { io.disconnect(); mo.disconnect() }
+  }, [])
 }
 
 export default function App() {
