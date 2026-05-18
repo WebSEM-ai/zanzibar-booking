@@ -88,7 +88,7 @@ export default function PropertyDetail() {
                 {property.amenities.map((a) => (
                   <div key={a.name} className="flex items-center gap-3 p-3 rounded-card bg-sand/20">
                     <span className="w-8 h-8 rounded-full bg-seafoam/20 flex items-center justify-center flex-shrink-0">
-                      <AmenityIcon name={a.icon} className="w-4 h-4 text-ocean" />
+                      <AmenityIcon type={a.icon} className="w-4 h-4 text-ocean" />
                     </span>
                     <span className="text-sm text-ocean/70">{a.name}</span>
                   </div>
