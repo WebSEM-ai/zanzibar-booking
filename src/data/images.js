@@ -1,0 +1,13 @@
+/* Centralized image imports with semantic names */
+export { default as heroBeach } from '../../photo/f9354ad2-1e23-4bad-876f-5e8dfdd30ab0.jpg'
+export { default as villaInterior } from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
+export { default as dhowBoat } from '../../photo/58a147fc-e9d3-43b7-b75b-16595550782f.jpg'
+export { default as tropicalBar } from '../../photo/7fe7f702-99a1-4fbc-b9ee-346f7a1525b6.jpg'
+export { default as stoneArch } from '../../photo/73dd3477-e36a-4e76-854c-d69082c5ce3c.jpg'
+export { default as coastline } from '../../photo/3a26d3ad-73d0-4a19-a9ba-eaa1aae62176.jpg'
+export { default as localPots } from '../../photo/68f25bca-fb49-471c-b4c4-a15303a15c0a.jpg'
+export { default as tealWall } from '../../photo/aff28e2c-b96f-4c77-868e-af3557b4ef90.jpg'
+export { default as beachVilla } from '../../photo/1e9b39ca-89fe-4ec5-acab-99be4a05aec7.jpg'
+export { default as hangingBaskets } from '../../photo/7bcda45e-d0aa-4e6c-b4f7-c6910e07d1e6.jpg'
+export { default as wovenTexture } from '../../photo/20cbdc56-c9e3-4996-b8a2-957f63831131.jpg'
+export { default as dhowSail } from '../../photo/0369bc9d-a345-4fb8-9346-6214824a2f8b.jpg'
