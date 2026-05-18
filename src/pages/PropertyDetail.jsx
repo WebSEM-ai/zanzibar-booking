@@ -138,7 +138,7 @@ export default function PropertyDetail() {
                         <p className="font-body text-sm font-semibold text-ocean">{review.name}</p>
                         <p className="text-xs text-ocean/40">{review.from} &middot; {review.date}</p>
                       </div>
-                      <StarRating rating={review.rating} className="w-3.5 h-3.5" />
+                      <StarRating rating={review.rating} className="w-3.5 h-3.5 text-spice" />
                     </div>
                     <p className="text-sm text-ocean/60 leading-relaxed">{review.text}</p>
                   </div>
