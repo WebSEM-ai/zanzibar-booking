@@ -1,9 +1,26 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-import villaImg from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
+import { villaInterior } from '../data/images'
+import Icon from '../components/ui/Icon'
+import StarRating from '../components/ui/StarRating'
 
 const steps = ['Trip Details', 'Guest Information', 'Payment']
+
+function InputField({ label, type, value, placeholder, onChange }) {
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-ocean/60 uppercase tracking-wider mb-2">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full px-4 py-3.5 bg-sand/20 border border-sand rounded-input text-sm text-ocean
+          placeholder:text-ocean/30 focus:outline-none focus:border-ocean/30 focus:bg-white transition-all"
+      />
+    </div>
+  )
+}
 
 export default function Booking() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -33,9 +50,7 @@ export default function Booking() {
         {/* Header */}
         <div className="mb-10">
           <Link to="/properties" className="text-sm text-ocean/40 hover:text-ocean transition-colors inline-flex items-center gap-1 mb-4">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
+            <Icon name="arrowLeft" className="w-4 h-4" />
             Back to property
           </Link>
           <h1 className="font-display text-section text-ocean">Complete your booking</h1>
@@ -49,9 +64,7 @@ export default function Booking() {
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300
                   ${i <= currentStep ? 'bg-cta-gradient text-white shadow-lg' : 'bg-sand text-ocean/30'}`}>
                   {i < currentStep ? (
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
+                    <Icon name="check" className="w-4 h-4" />
                   ) : (
                     i + 1
                   )}
@@ -166,9 +179,7 @@ export default function Booking() {
 
                   <div className="p-4 rounded-card bg-seafoam/10 border border-seafoam/20">
                     <div className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-ocean mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                      </svg>
+                      <Icon name="shield" className="w-5 h-5 text-ocean mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-ocean">Secure & encrypted</p>
                         <p className="text-xs text-ocean/50 mt-0.5">Your payment details are protected with bank-level encryption.</p>
@@ -218,15 +229,13 @@ export default function Booking() {
           <div className="lg:w-[360px] flex-shrink-0">
             <div className="sticky top-28 bg-white rounded-frame shadow-card overflow-hidden border border-sand/30">
               <div className="aspect-[16/9] overflow-hidden">
-                <img src={villaImg} alt="Bahari Beach House" className="w-full h-full object-cover" />
+                <img src={villaInterior} alt="Bahari Beach House" className="w-full h-full object-cover" />
               </div>
               <div className="p-6">
                 <span className="text-xs text-seafoam font-medium bg-seafoam/10 px-2 py-0.5 rounded-pill">Nungwi</span>
                 <h3 className="font-display text-xl font-semibold text-ocean mt-2">Bahari Beach House</h3>
                 <div className="flex items-center gap-1 mt-2 text-spice">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
+                  <Icon name="star" className="w-3.5 h-3.5" filled />
                   <span className="text-xs font-semibold">4.9</span>
                   <span className="text-[10px] text-ocean/40">(124 reviews)</span>
                 </div>
@@ -250,9 +259,7 @@ export default function Booking() {
                   <div className="mt-4 p-3 rounded-card bg-sand/20">
                     <div className="flex items-center justify-between text-xs text-ocean/50">
                       <span>{formData.checkIn}</span>
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                      </svg>
+                      <Icon name="arrowRight" className="w-4 h-4" />
                       <span>{formData.checkOut}</span>
                     </div>
                     <p className="text-xs text-ocean/40 text-center mt-1">{formData.guests} guest{formData.guests > 1 ? 's' : ''}</p>
@@ -263,22 +270,6 @@ export default function Booking() {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-function InputField({ label, type, value, placeholder, onChange }) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold text-ocean/60 uppercase tracking-wider mb-2">{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full px-4 py-3.5 bg-sand/20 border border-sand rounded-input text-sm text-ocean
-          placeholder:text-ocean/30 focus:outline-none focus:border-ocean/30 focus:bg-white transition-all"
-      />
     </div>
   )
 }

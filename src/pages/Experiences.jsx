@@ -1,47 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-import heroImg from '../../photo/f9354ad2-1e23-4bad-876f-5e8dfdd30ab0.jpg'
-import archImg from '../../photo/73dd3477-e36a-4e76-854c-d69082c5ce3c.jpg'
-import coastImg from '../../photo/3a26d3ad-73d0-4a19-a9ba-eaa1aae62176.jpg'
-import barImg from '../../photo/7fe7f702-99a1-4fbc-b9ee-346f7a1525b6.jpg'
-import basketsImg from '../../photo/7bcda45e-d0aa-4e6c-b4f7-c6910e07d1e6.jpg'
-import potsImg from '../../photo/68f25bca-fb49-471c-b4c4-a15303a15c0a.jpg'
-import tealImg from '../../photo/aff28e2c-b96f-4c77-868e-af3557b4ef90.jpg'
-import villaImg from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
-import beachImg from '../../photo/1e9b39ca-89fe-4ec5-acab-99be4a05aec7.jpg'
-import textureImg from '../../photo/20cbdc56-c9e3-4996-b8a2-957f63831131.jpg'
-
-const categories = ['All', 'Water', 'Culture', 'Food', 'Wellness', 'Adventure']
-
-const allExperiences = [
-  { id: 1, title: 'Sunset Dhow Cruise', category: 'Water', duration: '3 hours', price: 85, difficulty: 'Easy', maxGroup: 12, img: heroImg,
-    desc: 'Sail aboard a traditional wooden dhow as the sun paints the Indian Ocean in gold and crimson. Includes fresh fruit, local wine, and the company of dolphins.' },
-  { id: 2, title: 'Spice Farm Tour', category: 'Culture', duration: '4 hours', price: 45, difficulty: 'Easy', maxGroup: 15, img: basketsImg,
-    desc: 'Walk through fragrant plantations of clove, vanilla, cinnamon, and cardamom. Learn centuries-old cultivation methods and taste freshly harvested spices.' },
-  { id: 3, title: 'Stone Town Heritage Walk', category: 'Culture', duration: '3 hours', price: 35, difficulty: 'Easy', maxGroup: 10, img: archImg,
-    desc: 'Navigate the labyrinthine alleys of UNESCO-listed Stone Town with a local historian. Discover hidden courtyards, carved Zanzibar doors, and ancient trading posts.' },
-  { id: 4, title: 'Mnemba Atoll Snorkeling', category: 'Water', duration: '5 hours', price: 120, difficulty: 'Moderate', maxGroup: 8, img: coastImg,
-    desc: 'Dive into the crystal-clear waters of Mnemba Atoll, home to over 600 species of fish, sea turtles, and vibrant coral gardens.' },
-  { id: 5, title: 'Jozani Forest Trek', category: 'Adventure', duration: '3 hours', price: 40, difficulty: 'Easy', maxGroup: 12, img: textureImg,
-    desc: 'Explore Zanzibar\'s last indigenous forest and meet the rare Red Colobus monkeys. Walk through mangrove boardwalks and ancient fig trees.' },
-  { id: 6, title: 'Zanzibar Cooking Class', category: 'Food', duration: '4 hours', price: 65, difficulty: 'Easy', maxGroup: 8, img: potsImg,
-    desc: 'Start at the Darajani Market, selecting fresh ingredients with your chef-guide. Then master the art of pilau, biryani, and coconut fish curry.' },
-  { id: 7, title: 'Kite Surfing Lessons', category: 'Water', duration: '3 hours', price: 95, difficulty: 'Moderate', maxGroup: 4, img: villaImg,
-    desc: 'Learn to ride the wind on Paje\'s legendary flat-water lagoon. Expert IKO-certified instructors for all levels, gear included.' },
-  { id: 8, title: 'Beachside Yoga Retreat', category: 'Wellness', duration: '2 hours', price: 40, difficulty: 'Easy', maxGroup: 15, img: beachImg,
-    desc: 'Sunrise yoga on a secluded beach, followed by guided meditation and a fresh coconut water cool-down. Pure island tranquility.' },
-  { id: 9, title: 'Night Kayak Bioluminescence', category: 'Adventure', duration: '2 hours', price: 75, difficulty: 'Easy', maxGroup: 8, img: tealImg,
-    desc: 'Paddle through waters that glow electric blue beneath your kayak. A truly magical experience in the bioluminescent bays of Zanzibar.' },
-  { id: 10, title: 'Seafood Beach BBQ', category: 'Food', duration: '3 hours', price: 55, difficulty: 'Easy', maxGroup: 20, img: barImg,
-    desc: 'Feast on freshly grilled lobster, octopus, and kingfish right on the sand, as local musicians play traditional taarab under the stars.' },
-]
-
-const difficultyColors = {
-  Easy: 'bg-seafoam/20 text-ocean',
-  Moderate: 'bg-spice/10 text-spice',
-  Challenging: 'bg-coral/10 text-coral',
-}
+import { allExperiences, experienceCategories, difficultyColors } from '../data/experiences'
+import { tropicalBar } from '../data/images'
+import Icon from '../components/ui/Icon'
 
 export default function Experiences() {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -53,7 +14,7 @@ export default function Experiences() {
     <div className="pt-20 md:pt-24 min-h-screen bg-ivory">
       {/* Hero */}
       <div className="relative h-[40vh] min-h-[320px] overflow-hidden">
-        <img src={barImg} alt="Zanzibar experiences" className="w-full h-full object-cover" />
+        <img src={tropicalBar} alt="Zanzibar experiences" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="absolute inset-0 flex items-center justify-center text-center px-5">
           <div>
@@ -70,7 +31,7 @@ export default function Experiences() {
       <div className="sticky top-16 md:top-20 z-30 bg-ivory/95 backdrop-blur-md border-b border-sand/50">
         <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20">
           <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-4">
-            {categories.map((cat) => (
+            {experienceCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -95,7 +56,6 @@ export default function Experiences() {
               key={exp.id}
               className="reveal group bg-white rounded-frame shadow-card card-hover overflow-hidden"
             >
-              {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={exp.img}
@@ -113,22 +73,17 @@ export default function Experiences() {
                 </div>
               </div>
 
-              {/* Content */}
               <div className="p-5 md:p-6">
                 <h3 className="font-display text-xl font-semibold text-ocean mb-2">{exp.title}</h3>
                 <p className="text-sm text-ocean/50 leading-relaxed mb-4 line-clamp-2">{exp.desc}</p>
 
                 <div className="flex items-center gap-4 text-xs text-ocean/40 mb-4">
                   <span className="flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <Icon name="clock" className="w-3.5 h-3.5" />
                     {exp.duration}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                    </svg>
+                    <Icon name="users" className="w-3.5 h-3.5" />
                     Max {exp.maxGroup}
                   </span>
                 </div>
