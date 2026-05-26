@@ -49,7 +49,7 @@ export default function Footer() {
           {/* Brand Story */}
           <div>
             <Link to="/" className="font-display text-3xl font-light text-white block mb-4">
-              Zanzibar
+              Bahari Mirror
             </Link>
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
               Born from a love of the island and its people, we curate authentic Zanzibar experiences
@@ -109,7 +109,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-white/40">
               <p>
                 <span className="block text-white/60 font-medium mb-1">Email</span>
-                hello@zanzibar.travel
+                office@BahariMirror.com
               </p>
               <p>
                 <span className="block text-white/60 font-medium mb-1">Phone</span>
@@ -129,7 +129,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30">
-            &copy; 2026 Zanzibar Travel. All rights reserved.
+            &copy; 2026 Bahari Mirror. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {legalLinks.map((link) => (

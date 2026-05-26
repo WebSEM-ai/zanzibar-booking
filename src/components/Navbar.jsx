@@ -5,7 +5,7 @@ const navLinks = [
   { name: 'Destinations', href: '/properties' },
   { name: 'Experiences', href: '/experiences' },
   { name: 'Villas', href: '/properties' },
-  { name: 'Our Story', href: '#' },
+  { name: 'Stories', href: '/blog' },
 ]
 
 export default function Navbar() {
@@ -43,7 +43,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link to="/" className={`font-display text-2xl md:text-3xl font-light tracking-wide ${logoColor} transition-colors duration-300`}>
-              Zanzibar
+              Bahari Mirror
             </Link>
 
             {/* Desktop Nav */}

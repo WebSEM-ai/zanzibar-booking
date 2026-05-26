@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import heroImg from '../../photo/f9354ad2-1e23-4bad-876f-5e8dfdd30ab0.jpg'
-import archImg from '../../photo/73dd3477-e36a-4e76-854c-d69082c5ce3c.jpg'
-import coastImg from '../../photo/3a26d3ad-73d0-4a19-a9ba-eaa1aae62176.jpg'
-import barImg from '../../photo/7fe7f702-99a1-4fbc-b9ee-346f7a1525b6.jpg'
-import basketsImg from '../../photo/7bcda45e-d0aa-4e6c-b4f7-c6910e07d1e6.jpg'
-import potsImg from '../../photo/68f25bca-fb49-471c-b4c4-a15303a15c0a.jpg'
-import tealImg from '../../photo/aff28e2c-b96f-4c77-868e-af3557b4ef90.jpg'
-import villaImg from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
-import beachImg from '../../photo/1e9b39ca-89fe-4ec5-acab-99be4a05aec7.jpg'
-import textureImg from '../../photo/20cbdc56-c9e3-4996-b8a2-957f63831131.jpg'
+import heroImg from '../../photo/bahari/exterior-sunset.webp'
+import archImg from '../../photo/bahari/exterior-entrance.webp'
+import coastImg from '../../photo/bahari/exterior-pool-view.webp'
+import barImg from '../../photo/bahari/living-sunset.webp'
+import basketsImg from '../../photo/bahari/living-kitchen.webp'
+import potsImg from '../../photo/bahari/living-nook.webp'
+import tealImg from '../../photo/bahari/exterior-night-pool.webp'
+import villaImg from '../../photo/bahari/exterior-pool-palms.webp'
+import beachImg from '../../photo/bahari/exterior-pool-loungers.webp'
+import textureImg from '../../photo/bahari/exterior-pool-forest.webp'
 
 const categories = ['All', 'Water', 'Culture', 'Food', 'Wellness', 'Adventure']
 
@@ -53,8 +53,15 @@ export default function Experiences() {
     <div className="pt-20 md:pt-24 min-h-screen bg-ivory">
       {/* Hero */}
       <div className="relative h-[40vh] min-h-[320px] overflow-hidden">
-        <img src={barImg} alt="Zanzibar experiences" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-hero-overlay" />
+        <video
+          autoPlay muted loop playsInline
+          poster="/media/15442.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/media/2279101_Drone_Shot_Nungwi_Beach_1920x1080.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight/30 to-midnight/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight/40 via-transparent to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center text-center px-5">
           <div>
             <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-seafoam mb-4">Things to Do</p>

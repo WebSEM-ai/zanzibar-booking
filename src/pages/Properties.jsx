@@ -1,30 +1,26 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import villaImg1 from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
-import villaImg2 from '../../photo/58a147fc-e9d3-43b7-b75b-16595550782f.jpg'
-import barImg from '../../photo/7fe7f702-99a1-4fbc-b9ee-346f7a1525b6.jpg'
-import beachVillaImg from '../../photo/1e9b39ca-89fe-4ec5-acab-99be4a05aec7.jpg'
-import archImg from '../../photo/73dd3477-e36a-4e76-854c-d69082c5ce3c.jpg'
-import coastImg from '../../photo/3a26d3ad-73d0-4a19-a9ba-eaa1aae62176.jpg'
-import heroImg from '../../photo/f9354ad2-1e23-4bad-876f-5e8dfdd30ab0.jpg'
-import tealImg from '../../photo/aff28e2c-b96f-4c77-868e-af3557b4ef90.jpg'
-import potsImg from '../../photo/68f25bca-fb49-471c-b4c4-a15303a15c0a.jpg'
+import exteriorHero from '../../photo/bahari/exterior-hero.webp'
+import exteriorPoolPalms from '../../photo/bahari/exterior-pool-palms.webp'
+import exteriorPoolLoungers from '../../photo/bahari/exterior-pool-loungers.webp'
+import exteriorSunset from '../../photo/bahari/exterior-sunset.webp'
+import exteriorNight from '../../photo/bahari/exterior-night.webp'
+import exteriorNightPool from '../../photo/bahari/exterior-night-pool.webp'
+import exteriorFront from '../../photo/bahari/exterior-front.webp'
+import exteriorPoolForest from '../../photo/bahari/exterior-pool-forest.webp'
+import exteriorEntrance from '../../photo/bahari/exterior-entrance.webp'
 
 const allProperties = [
-  { id: 1, name: 'Bahari Beach House', location: 'Nungwi', type: 'Villa', price: 450, rating: 4.9, reviews: 124, beds: 4, guests: 8, img: villaImg1, tags: ['Beachfront', 'Pool', 'Eco-Certified'] },
-  { id: 2, name: 'Spice Island Villa', location: 'Matemwe', type: 'Villa', price: 680, rating: 5.0, reviews: 89, beds: 5, guests: 10, img: beachVillaImg, tags: ['Private Island', 'Luxury', 'Staff'] },
-  { id: 3, name: 'Stone Town Riad', location: 'Stone Town', type: 'Boutique Hotel', price: 280, rating: 4.8, reviews: 201, beds: 3, guests: 6, img: villaImg2, tags: ['Heritage', 'Rooftop', 'Central'] },
-  { id: 4, name: 'Paje Ocean Lodge', location: 'Paje', type: 'Lodge', price: 350, rating: 4.9, reviews: 156, beds: 3, guests: 6, img: barImg, tags: ['Ocean View', 'Kite Spot', 'Restaurant'] },
-  { id: 5, name: 'Mnemba Seaview', location: 'Mnemba', type: 'Villa', price: 920, rating: 5.0, reviews: 67, beds: 6, guests: 12, img: coastImg, tags: ['Exclusive', 'Private Beach', 'Chef'] },
-  { id: 6, name: 'Zanzi Coral Suite', location: 'Nungwi', type: 'Boutique Hotel', price: 195, rating: 4.7, reviews: 312, beds: 1, guests: 2, img: heroImg, tags: ['Couples', 'Spa', 'All-Inclusive'] },
-  { id: 7, name: 'Swahili Heritage House', location: 'Stone Town', type: 'Heritage Home', price: 320, rating: 4.8, reviews: 98, beds: 4, guests: 8, img: archImg, tags: ['Historical', 'Courtyard', 'Central'] },
-  { id: 8, name: 'Kizimkazi Retreat', location: 'Kizimkazi', type: 'Lodge', price: 410, rating: 4.9, reviews: 143, beds: 3, guests: 6, img: tealImg, tags: ['Dolphins', 'Sunset', 'Quiet'] },
-  { id: 9, name: 'Jambiani Beach Bungalow', location: 'Jambiani', type: 'Bungalow', price: 165, rating: 4.6, reviews: 189, beds: 2, guests: 4, img: potsImg, tags: ['Budget-Friendly', 'Authentic', 'Beach'] },
+  { id: 1, name: 'Emozia', location: 'Jambiani', type: 'Villa', price: 0, rating: 5.0, reviews: 3, beds: 2, guests: 6, img: exteriorHero, tags: ['Pool', 'Garden', '200m to beach'] },
+  { id: 2, name: 'Soul Rise', location: 'Jambiani', type: 'Villa', price: 0, rating: 5.0, reviews: 3, beds: 2, guests: 6, img: exteriorPoolPalms, tags: ['Pool', 'Private', '200m to beach'] },
+  { id: 3, name: 'Azuria', location: 'Jambiani', type: 'Villa', price: 0, rating: 0, reviews: 0, beds: 2, guests: 4, img: exteriorSunset, tags: ['Photos coming soon'], comingSoon: true },
+  { id: 4, name: 'Serenity', location: 'Jambiani', type: 'Villa', price: 0, rating: 0, reviews: 0, beds: 2, guests: 4, img: exteriorFront, tags: ['Photos coming soon'], comingSoon: true },
+  { id: 5, name: 'Lumira', location: 'Jambiani', type: 'Villa', price: 0, rating: 0, reviews: 0, beds: 2, guests: 4, img: exteriorEntrance, tags: ['Photos coming soon'], comingSoon: true },
 ]
 
-const locations = ['All', 'Nungwi', 'Stone Town', 'Paje', 'Matemwe', 'Mnemba', 'Kizimkazi', 'Jambiani']
-const types = ['All', 'Villa', 'Boutique Hotel', 'Lodge', 'Heritage Home', 'Bungalow']
+const locations = ['All', 'Jambiani']
+const types = ['All', 'Villa']
 const sortOptions = ['Recommended', 'Price: Low to High', 'Price: High to Low', 'Top Rated']
 
 export default function Properties() {
@@ -41,18 +37,35 @@ export default function Properties() {
     return true
   })
 
-  if (sortBy === 'Price: Low to High') filtered.sort((a, b) => a.price - b.price)
-  if (sortBy === 'Price: High to Low') filtered.sort((a, b) => b.price - a.price)
-  if (sortBy === 'Top Rated') filtered.sort((a, b) => b.rating - a.rating)
+  // Coming-soon properties always sort last
+  const byComingSoon = (a, b) => Number(!!a.comingSoon) - Number(!!b.comingSoon)
+  if (sortBy === 'Price: Low to High') filtered.sort((a, b) => byComingSoon(a, b) || a.price - b.price)
+  if (sortBy === 'Price: High to Low') filtered.sort((a, b) => byComingSoon(a, b) || b.price - a.price)
+  if (sortBy === 'Top Rated') filtered.sort((a, b) => byComingSoon(a, b) || b.rating - a.rating)
+  if (sortBy === 'Recommended') filtered.sort(byComingSoon)
 
   return (
     <div className="pt-20 md:pt-24 min-h-screen bg-ivory">
-      {/* Page Header */}
-      <div className="bg-sand/30 border-b border-sand">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 py-10 md:py-14">
-          <p className="section-eyebrow">Curated Collection</p>
-          <h1 className="font-display text-section text-ocean">Properties & Villas</h1>
-          <p className="font-body text-base text-ocean/50 mt-2 max-w-lg">
+      {/* Cinematic Page Header */}
+      <div className="relative h-[50vh] min-h-[340px] max-h-[480px] overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/media/2151682888.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/media/0_Boat_Sailing_1920x1080.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight/30 to-midnight/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight/40 via-transparent to-transparent" />
+        {/* Content */}
+        <div className="relative z-10 h-full flex flex-col justify-end max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 pb-10 md:pb-14">
+          <p className="font-body text-xs font-semibold tracking-[0.2em] uppercase text-seafoam mb-3">Curated Collection</p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white font-semibold">Properties & Villas</h1>
+          <p className="font-body text-base text-white/60 mt-3 max-w-lg">
             Every property handpicked for its character, quality, and location. Your perfect Zanzibar stay awaits.
           </p>
         </div>
@@ -190,15 +203,38 @@ function PropertyCard({ property }) {
         <img
           src={property.img}
           alt={property.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${property.video ? 'group-hover:opacity-0' : ''}`}
           loading="lazy"
         />
+        {property.video && (
+          <>
+            <video
+              src={property.video}
+              muted
+              loop
+              playsInline
+              onMouseEnter={(e) => e.target.play()}
+              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              ref={(el) => {
+                if (!el) return
+                const card = el.closest('.group')
+                card.addEventListener('mouseenter', () => el.play())
+                card.addEventListener('mouseleave', () => { el.pause(); el.currentTime = 0 })
+              }}
+            />
+            <div className="absolute top-4 right-14 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity">
+              <svg className="w-4 h-4 text-ocean ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </>
+        )}
         <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
           {property.tags.slice(0, 2).map((tag) => (
             <span
               key={tag}
               className={`px-2.5 py-1 text-[10px] font-semibold tracking-wide uppercase rounded-pill backdrop-blur-sm
-                ${tag === 'Eco-Certified' || tag === 'Exclusive' ? 'bg-seafoam/90 text-midnight' : 'bg-white/90 text-ocean'}`}
+                ${property.comingSoon ? 'bg-coral/90 text-white' : 'bg-white/90 text-ocean'}`}
             >
               {tag}
             </span>
@@ -218,24 +254,32 @@ function PropertyCard({ property }) {
       <div className="p-5">
         <div className="flex items-start justify-between mb-1">
           <span className="text-xs text-seafoam font-medium bg-seafoam/10 px-2 py-0.5 rounded-pill">{property.location}</span>
-          <div className="flex items-center gap-1 text-spice">
-            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <span className="text-xs font-semibold">{property.rating}</span>
-            <span className="text-[10px] text-ocean/40">({property.reviews})</span>
-          </div>
+          {property.reviews > 0 && (
+            <div className="flex items-center gap-1 text-spice">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span className="text-xs font-semibold">{property.rating}</span>
+              <span className="text-[10px] text-ocean/40">({property.reviews})</span>
+            </div>
+          )}
         </div>
         <h3 className="font-display text-xl font-semibold text-ocean mt-2">{property.name}</h3>
         <p className="text-xs text-ocean/40 mt-1">{property.type} &middot; {property.beds} bed &middot; Up to {property.guests} guests</p>
 
         <div className="flex items-center justify-between mt-4 pt-4 border-t border-sand/50">
           <p>
-            <span className="font-display text-xl font-semibold text-ocean">${property.price}</span>
-            <span className="text-xs text-ocean/40 ml-1">/ night</span>
+            {property.price > 0 ? (
+              <>
+                <span className="font-display text-xl font-semibold text-ocean">${property.price}</span>
+                <span className="text-xs text-ocean/40 ml-1">/ night</span>
+              </>
+            ) : (
+              <span className="font-display text-base text-ocean/50 italic">On request</span>
+            )}
           </p>
           <span className="text-xs font-medium text-coral group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            View
+            {property.comingSoon ? 'Inquire' : 'View'}
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>

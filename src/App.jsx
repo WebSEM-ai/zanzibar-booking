@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -7,11 +7,13 @@ import Properties from './pages/Properties'
 import PropertyDetail from './pages/PropertyDetail'
 import Experiences from './pages/Experiences'
 import Booking from './pages/Booking'
+import Blog from './pages/Blog'
 
 function ScrollToTop() {
+  const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  }, [pathname])
   return null
 }
 
@@ -58,14 +60,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <ScrollToTop />
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<><ScrollToTop /><Home /></>} />
-          <Route path="/properties" element={<><ScrollToTop /><Properties /></>} />
-          <Route path="/property/:id" element={<><ScrollToTop /><PropertyDetail /></>} />
-          <Route path="/experiences" element={<><ScrollToTop /><Experiences /></>} />
-          <Route path="/booking" element={<><ScrollToTop /><Booking /></>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/property/:id" element={<PropertyDetail />} />
+          <Route path="/experiences" element={<Experiences />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </main>
       <Footer />

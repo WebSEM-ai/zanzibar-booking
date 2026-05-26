@@ -1,38 +1,86 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-/* ─── Image imports from photo/ folder ─── */
-import heroImg from '../../photo/f9354ad2-1e23-4bad-876f-5e8dfdd30ab0.jpg'
-import villaImg1 from '../../photo/f5a20891-522b-48ee-a3c7-48939385e7b9.jpg'
-import villaImg2 from '../../photo/58a147fc-e9d3-43b7-b75b-16595550782f.jpg'
-import barImg from '../../photo/7fe7f702-99a1-4fbc-b9ee-346f7a1525b6.jpg'
-import archImg from '../../photo/73dd3477-e36a-4e76-854c-d69082c5ce3c.jpg'
-import coastImg from '../../photo/3a26d3ad-73d0-4a19-a9ba-eaa1aae62176.jpg'
-import potsImg from '../../photo/68f25bca-fb49-471c-b4c4-a15303a15c0a.jpg'
-import tealImg from '../../photo/aff28e2c-b96f-4c77-868e-af3557b4ef90.jpg'
-import beachVillaImg from '../../photo/1e9b39ca-89fe-4ec5-acab-99be4a05aec7.jpg'
-import basketsImg from '../../photo/7bcda45e-d0aa-4e6c-b4f7-c6910e07d1e6.jpg'
-import textureImg from '../../photo/20cbdc56-c9e3-4996-b8a2-957f63831131.jpg'
-import dhowImg from '../../photo/0369bc9d-a345-4fb8-9346-6214824a2f8b.jpg'
-import sailImg from '../../photo/58a147fc-e9d3-43b7-b75b-16595550782f.jpg'
+/* ─── Bahari Mirror image imports ─── */
+import exteriorHero from '../../photo/bahari/exterior-hero.webp'
+import exteriorFront from '../../photo/bahari/exterior-front.webp'
+import exteriorEntrance from '../../photo/bahari/exterior-entrance.webp'
+import exteriorVillaWide from '../../photo/bahari/exterior-villa-wide.webp'
+import exteriorPoolDay from '../../photo/bahari/exterior-pool-day.webp'
+import exteriorPoolPalms from '../../photo/bahari/exterior-pool-palms.webp'
+import exteriorPoolLoungers from '../../photo/bahari/exterior-pool-loungers.webp'
+import exteriorPoolForest from '../../photo/bahari/exterior-pool-forest.webp'
+import exteriorPoolView from '../../photo/bahari/exterior-pool-view.webp'
+import exteriorSunset from '../../photo/bahari/exterior-sunset.webp'
+import exteriorNight from '../../photo/bahari/exterior-night.webp'
+import exteriorNightPool from '../../photo/bahari/exterior-night-pool.webp'
+import livingHero from '../../photo/bahari/living-hero.webp'
+import livingSunset from '../../photo/bahari/living-sunset.webp'
+import livingDay from '../../photo/bahari/living-day.webp'
+import livingKitchen from '../../photo/bahari/living-kitchen.webp'
+import livingStairs from '../../photo/bahari/living-stairs.webp'
+import livingView from '../../photo/bahari/living-view.webp'
+import livingNook from '../../photo/bahari/living-nook.webp'
+import bedroomHero from '../../photo/bahari/bedroom-hero.webp'
+import bedroomPoolView from '../../photo/bahari/bedroom-pool-view.webp'
+import bedroomCozy from '../../photo/bahari/bedroom-cozy.webp'
+import bedroomSafari from '../../photo/bahari/bedroom-safari.webp'
+import bathroomHero from '../../photo/bahari/bathroom-hero.webp'
+import bathroomTub from '../../photo/bahari/bathroom-tub.webp'
+import bathroomDark from '../../photo/bahari/bathroom-dark.webp'
+import bathroomShower from '../../photo/bahari/bathroom-shower.webp'
+
+/* Hero slider images (in display order) */
+const heroSlides = [exteriorHero, livingHero, exteriorSunset, bedroomHero, exteriorPoolDay]
 
 /* ═══════════════════════════════════════════
    HERO SECTION
    ═══════════════════════════════════════════ */
 function Hero() {
   const [loaded, setLoaded] = useState(false)
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    setLoaded(true)
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % heroSlides.length)
+    }, 5500)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <section className="relative h-screen min-h-[700px] overflow-hidden">
-      {/* Background Image */}
+      {/* Background Slider */}
       <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="Zanzibar turquoise beach"
-          className={`w-full h-full object-cover transition-all duration-1000 ${loaded ? 'scale-100 opacity-100' : 'scale-105 opacity-0'}`}
-          onLoad={() => setLoaded(true)}
-        />
-        <div className="absolute inset-0 bg-hero-overlay" />
+        {heroSlides.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            aria-hidden={i !== active}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1800ms] ease-out
+              ${i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}
+              ${loaded ? '' : 'opacity-0'}`}
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        ))}
+        {/* Modern gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-midnight/70 via-midnight/40 to-midnight/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight/50 via-transparent to-midnight/30" />
+      </div>
+
+      {/* Slider dots */}
+      <div className="absolute bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {heroSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`h-[2px] transition-all duration-500 ${
+              i === active ? 'w-8 bg-white' : 'w-4 bg-white/40 hover:bg-white/70'
+            }`}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
       </div>
 
       {/* Hero Content */}
@@ -149,28 +197,28 @@ const destinations = [
     name: 'Stone Town',
     tagline: 'The cultural heart',
     desc: 'Wander through centuries-old alleyways, past carved wooden doors and bustling spice markets.',
-    img: archImg,
+    img: exteriorEntrance,
     badge: 'UNESCO Heritage',
   },
   {
     name: 'Nungwi',
     tagline: 'Where the sun sets last',
     desc: 'Pristine white sands meet the deepest turquoise, with traditional dhow boats dotting the horizon.',
-    img: heroImg,
+    img: exteriorSunset,
     badge: 'Most Popular',
   },
   {
     name: 'Paje',
     tagline: 'The kite surfer\'s paradise',
     desc: 'Endless shallow lagoons, vibrant beach culture, and the best seafood you\'ll ever taste.',
-    img: coastImg,
+    img: exteriorPoolPalms,
     badge: 'Adventure',
   },
   {
     name: 'Mnemba Island',
     tagline: 'Your private atoll',
     desc: 'An exclusive island sanctuary surrounded by the richest marine life in the archipelago.',
-    img: beachVillaImg,
+    img: exteriorPoolForest,
     badge: 'Exclusive',
   },
 ]
@@ -230,7 +278,7 @@ const whyBlocks = [
     title: 'Rooted in the island',
     desc: 'We\'re not a distant booking engine. Our team lives and breathes Zanzibar — from the spice farms of Kizimbani to the reefs of Chumbe. Every recommendation comes from personal experience, not an algorithm.',
     highlights: ['Local guides & partnerships', 'Community-first tourism', 'Authentic cultural immersion'],
-    img: barImg,
+    img: livingDay,
     reverse: false,
   },
   {
@@ -238,7 +286,7 @@ const whyBlocks = [
     title: 'Curated, never crowded',
     desc: 'Every villa, lodge, and experience on our platform has been personally visited and vetted. We say no to 80% of what we review, so you only see the island\'s finest.',
     highlights: ['Hand-selected properties', 'Quality over quantity', 'Regular on-site reviews'],
-    img: tealImg,
+    img: bedroomCozy,
     reverse: true,
   },
   {
@@ -246,7 +294,7 @@ const whyBlocks = [
     title: 'Effortless end-to-end',
     desc: 'Flights, transfers, accommodation, and experiences — woven together into one seamless journey. Your private concierge handles every detail so you can simply arrive and exhale.',
     highlights: ['Airport transfers included', 'Personal trip concierge', '24/7 on-island support'],
-    img: potsImg,
+    img: bathroomTub,
     reverse: false,
   },
 ]
@@ -314,12 +362,12 @@ function WhyZanzibar() {
    POPULAR EXPERIENCES
    ═══════════════════════════════════════════ */
 const experiences = [
-  { title: 'Sunset Dhow Cruise', category: 'Water', duration: '3 hours', price: 85, img: heroImg },
-  { title: 'Spice Farm Tour', category: 'Cultural', duration: '4 hours', price: 45, img: basketsImg },
-  { title: 'Stone Town Walking Tour', category: 'Culture', duration: '3 hours', price: 35, img: archImg },
-  { title: 'Mnemba Snorkeling', category: 'Water', duration: '5 hours', price: 120, img: coastImg },
-  { title: 'Jozani Forest Trek', category: 'Adventure', duration: '3 hours', price: 40, img: textureImg },
-  { title: 'Cooking Class', category: 'Food', duration: '4 hours', price: 65, img: dhowImg },
+  { title: 'Sunset Dhow Cruise', category: 'Water', duration: '3 hours', price: 85, img: exteriorSunset },
+  { title: 'Spice Farm Tour', category: 'Cultural', duration: '4 hours', price: 45, img: livingKitchen },
+  { title: 'Stone Town Walking Tour', category: 'Culture', duration: '3 hours', price: 35, img: exteriorEntrance },
+  { title: 'Mnemba Snorkeling', category: 'Water', duration: '5 hours', price: 120, img: exteriorPoolView },
+  { title: 'Jozani Forest Trek', category: 'Adventure', duration: '3 hours', price: 40, img: exteriorPoolForest },
+  { title: 'Cooking Class', category: 'Food', duration: '4 hours', price: 65, img: livingNook },
 ]
 
 function PopularExperiences() {
@@ -495,50 +543,10 @@ function Testimonials() {
    FEATURED VILLAS
    ═══════════════════════════════════════════ */
 const villas = [
-  {
-    name: 'Bahari Beach House',
-    location: 'Nungwi',
-    price: 450,
-    rating: 4.9,
-    reviews: 124,
-    beds: 4,
-    guests: 8,
-    img: villaImg1,
-    tags: ['Beachfront', 'Pool', 'Eco-Certified'],
-  },
-  {
-    name: 'Spice Island Villa',
-    location: 'Matemwe',
-    price: 680,
-    rating: 5.0,
-    reviews: 89,
-    beds: 5,
-    guests: 10,
-    img: beachVillaImg,
-    tags: ['Private Island', 'Luxury', 'Staff'],
-  },
-  {
-    name: 'Stone Town Riad',
-    location: 'Stone Town',
-    price: 280,
-    rating: 4.8,
-    reviews: 201,
-    beds: 3,
-    guests: 6,
-    img: villaImg2,
-    tags: ['Heritage', 'Rooftop', 'Central'],
-  },
-  {
-    name: 'Paje Ocean Lodge',
-    location: 'Paje',
-    price: 350,
-    rating: 4.9,
-    reviews: 156,
-    beds: 3,
-    guests: 6,
-    img: barImg,
-    tags: ['Ocean View', 'Kite Spot', 'Restaurant'],
-  },
+  { id: 1, name: 'Emozia',    location: 'Jambiani', price: 0, rating: 5.0, reviews: 3, beds: 2, guests: 6, img: exteriorHero,        tags: ['Pool', 'Garden', '200m to beach'] },
+  { id: 2, name: 'Soul Rise', location: 'Jambiani', price: 0, rating: 5.0, reviews: 3, beds: 2, guests: 6, img: exteriorPoolPalms,   tags: ['Pool', 'Private', '200m to beach'] },
+  { id: 3, name: 'Azuria',    location: 'Jambiani', price: 0, rating: 0,   reviews: 0, beds: 2, guests: 4, img: exteriorSunset,      tags: ['Photos coming soon'], comingSoon: true },
+  { id: 4, name: 'Serenity',  location: 'Jambiani', price: 0, rating: 0,   reviews: 0, beds: 2, guests: 4, img: exteriorFront,       tags: ['Photos coming soon'], comingSoon: true },
 ]
 
 function FeaturedVillas() {
@@ -561,7 +569,7 @@ function FeaturedVillas() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {villas.map((villa, i) => (
             <Link
-              to={`/property/${i + 1}`}
+              to={`/property/${villa.id}`}
               key={villa.name}
               className={`reveal reveal-delay-${(i % 2) + 1} group rounded-frame overflow-hidden shadow-card card-hover bg-white`}
             >
@@ -579,7 +587,7 @@ function FeaturedVillas() {
                     <span
                       key={tag}
                       className={`px-2.5 py-1 text-[10px] font-semibold tracking-wide uppercase rounded-pill
-                        ${tag === 'Eco-Certified' ? 'bg-seafoam text-midnight' : 'bg-white/90 text-ocean'}`}
+                        ${villa.comingSoon ? 'bg-coral/90 text-white' : 'bg-white/90 text-ocean'}`}
                     >
                       {tag}
                     </span>
@@ -604,13 +612,15 @@ function FeaturedVillas() {
                     <span className="text-xs text-seafoam font-medium bg-seafoam/10 px-2 py-0.5 rounded-pill">{villa.location}</span>
                     <h3 className="font-display text-card-title text-ocean mt-2">{villa.name}</h3>
                   </div>
-                  <div className="flex items-center gap-1 text-spice">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <span className="text-sm font-semibold">{villa.rating}</span>
-                    <span className="text-xs text-ocean/40">({villa.reviews})</span>
-                  </div>
+                  {villa.reviews > 0 && (
+                    <div className="flex items-center gap-1 text-spice">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span className="text-sm font-semibold">{villa.rating}</span>
+                      <span className="text-xs text-ocean/40">({villa.reviews})</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-4 text-xs text-ocean/50 mt-3 mb-4">
@@ -630,11 +640,17 @@ function FeaturedVillas() {
 
                 <div className="flex items-center justify-between pt-4 border-t border-sand/50">
                   <p>
-                    <span className="font-display text-2xl font-semibold text-ocean">${villa.price}</span>
-                    <span className="text-sm text-ocean/40 ml-1">/ night</span>
+                    {villa.price > 0 ? (
+                      <>
+                        <span className="font-display text-2xl font-semibold text-ocean">${villa.price}</span>
+                        <span className="text-sm text-ocean/40 ml-1">/ night</span>
+                      </>
+                    ) : (
+                      <span className="font-display text-lg text-ocean/50 italic">On request</span>
+                    )}
                   </p>
                   <span className="text-sm font-medium text-coral group-hover:translate-x-1 transition-transform duration-300 inline-flex items-center gap-1">
-                    View Details
+                    {villa.comingSoon ? 'Inquire' : 'View Details'}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
@@ -658,8 +674,8 @@ function GuideCta() {
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
         <div className="relative">
           <img
-            src={tealImg}
-            alt="Zanzibar interior"
+            src={livingStairs}
+            alt="Bahari Mirror interior"
             className="w-full h-full object-cover min-h-[300px]"
             loading="lazy"
           />
