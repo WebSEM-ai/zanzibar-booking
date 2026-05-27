@@ -275,83 +275,91 @@ function FeaturedDestinations() {
 const whyBlocks = [
   {
     number: '01',
-    title: 'Rooted in the island',
-    desc: 'We\'re not a distant booking engine. Our team lives and breathes Zanzibar — from the spice farms of Kizimbani to the reefs of Chumbe. Every recommendation comes from personal experience, not an algorithm.',
-    highlights: ['Local guides & partnerships', 'Community-first tourism', 'Authentic cultural immersion'],
-    img: livingDay,
-    reverse: false,
+    title: 'A villa, not a hotel room',
+    desc: 'Each Bahari Mirror villa is a stand-alone home with its own private pool, garden, and entrance. No corridors, no shared lobbies, no neighbours behind the wall — just space that belongs to you for the length of your stay.',
+    highlights: ['Private pool & garden', '200 m to the beach', 'Up to 6 guests per villa'],
+    img: exteriorPoolPalms,
   },
   {
     number: '02',
-    title: 'Curated, never crowded',
-    desc: 'Every villa, lodge, and experience on our platform has been personally visited and vetted. We say no to 80% of what we review, so you only see the island\'s finest.',
-    highlights: ['Hand-selected properties', 'Quality over quantity', 'Regular on-site reviews'],
-    img: bedroomCozy,
-    reverse: true,
+    title: 'Rooted in Swahili craft',
+    desc: 'Hand-cut coral stone walls, makuti-thatched ceilings, hardwood floors, and woven textiles — built and maintained by local craftsmen. The villas feel modern, but every detail is made on the island.',
+    highlights: ['Local materials & craft', 'Makuti-thatched ceilings', 'Hand-cut coral stone'],
+    img: livingHero,
   },
   {
     number: '03',
-    title: 'Effortless end-to-end',
-    desc: 'Flights, transfers, accommodation, and experiences — woven together into one seamless journey. Your private concierge handles every detail so you can simply arrive and exhale.',
-    highlights: ['Airport transfers included', 'Personal trip concierge', '24/7 on-island support'],
-    img: bathroomTub,
-    reverse: false,
+    title: 'Hosted, not managed',
+    desc: 'You\'re welcomed in person, served breakfast on the terrace, and helped to plan whatever you want to do — snorkelling at Mnemba, a Spice Farm tour, or simply a quiet day by the pool. Your host is one call away the entire stay.',
+    highlights: ['In-person welcome', 'Continental breakfast', 'On-call host for your trip'],
+    img: bathroomHero,
   },
 ]
 
 function WhyZanzibar() {
+  const [active, setActive] = useState(0)
+  const block = whyBlocks[active]
+
   return (
-    <section className="section-padding bg-sand/30 bg-pattern">
+    <section className="section-padding bg-sand/20 bg-pattern">
       <div className="max-w-[1440px] mx-auto">
-        <div className="text-center mb-20 reveal">
+        <div className="text-center mb-12 md:mb-16 reveal">
           <p className="section-eyebrow">Why Choose Us</p>
-          <h2 className="section-title">The Zanzibar difference</h2>
+          <h2 className="section-title">The Bahari Mirror difference</h2>
         </div>
 
-        <div className="space-y-24 md:space-y-32">
-          {whyBlocks.map((block, i) => (
-            <div
-              key={block.number}
-              className={`reveal flex flex-col ${block.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16`}
+        {/* Tab buttons */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-14 reveal">
+          {whyBlocks.map((b, i) => (
+            <button
+              key={b.number}
+              onClick={() => setActive(i)}
+              className={`flex items-center gap-3 px-5 md:px-7 py-3 md:py-3.5 rounded-pill text-sm md:text-base font-medium tracking-wide
+                transition-all duration-300
+                ${active === i
+                  ? 'bg-ocean text-white shadow-card'
+                  : 'bg-white/70 text-ocean/70 hover:bg-white hover:text-ocean border border-sand/40'
+                }`}
             >
-              {/* Image */}
-              <div className="w-full md:w-1/2 relative">
-                <span className="absolute -top-8 -left-4 font-display text-[120px] font-light text-sand/60 leading-none select-none hidden md:block">
-                  {block.number}
-                </span>
-                <div className="rounded-frame overflow-hidden shadow-card">
-                  <img
-                    src={block.img}
-                    alt={block.title}
-                    className="w-full h-[350px] md:h-[450px] object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Text */}
-              <div className="w-full md:w-1/2">
-                <span className="font-display text-5xl font-light text-coral/20 md:hidden">{block.number}</span>
-                <h3 className="font-display text-3xl md:text-4xl text-ocean mb-4">{block.title}</h3>
-                <p className="font-body text-base text-ocean/60 leading-relaxed mb-6">{block.desc}</p>
-                <ul className="space-y-3">
-                  {block.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-3 text-sm text-ocean/70">
-                      <span className="w-5 h-5 rounded-full bg-seafoam/30 flex items-center justify-center flex-shrink-0">
-                        <svg className="w-3 h-3 text-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-                <Link to="/properties" className="btn-outline mt-8 inline-flex">
-                  Learn More
-                </Link>
-              </div>
-            </div>
+              <span className={`font-display text-xs ${active === i ? 'text-sand' : 'text-ocean/40'}`}>{b.number}</span>
+              <span>{b.title}</span>
+            </button>
           ))}
+        </div>
+
+        {/* Active panel */}
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-14 reveal" key={block.number}>
+          <div className="relative order-2 md:order-1">
+            <span className="absolute -top-8 -left-4 font-display text-[140px] font-light text-sand/50 leading-none select-none hidden md:block">
+              {block.number}
+            </span>
+            <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-ocean mb-5 leading-tight">{block.title}</h3>
+            <p className="font-body text-base md:text-lg text-ocean/60 leading-relaxed mb-7">{block.desc}</p>
+            <ul className="space-y-3 mb-8">
+              {block.highlights.map((h) => (
+                <li key={h} className="flex items-center gap-3 text-sm text-ocean/70">
+                  <span className="w-5 h-5 rounded-full bg-seafoam/30 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <Link to="/properties" className="btn-outline inline-flex">
+              Browse Villas
+            </Link>
+          </div>
+
+          <div className="order-1 md:order-2 rounded-frame overflow-hidden shadow-card">
+            <img
+              src={block.img}
+              alt={block.title}
+              className="w-full h-[300px] md:h-[480px] object-cover transition-opacity duration-500"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -359,18 +367,20 @@ function WhyZanzibar() {
 }
 
 /* ═══════════════════════════════════════════
-   POPULAR EXPERIENCES
+   AREA ATTRACTIONS — what's near the villas
    ═══════════════════════════════════════════ */
-const experiences = [
-  { title: 'Sunset Dhow Cruise', category: 'Water', duration: '3 hours', price: 85, img: exteriorSunset },
-  { title: 'Spice Farm Tour', category: 'Cultural', duration: '4 hours', price: 45, img: livingKitchen },
-  { title: 'Stone Town Walking Tour', category: 'Culture', duration: '3 hours', price: 35, img: exteriorEntrance },
-  { title: 'Mnemba Snorkeling', category: 'Water', duration: '5 hours', price: 120, img: exteriorPoolView },
-  { title: 'Jozani Forest Trek', category: 'Adventure', duration: '3 hours', price: 40, img: exteriorPoolForest },
-  { title: 'Cooking Class', category: 'Food', duration: '4 hours', price: 65, img: livingNook },
+const attractions = [
+  { title: 'Mnemba Atoll Snorkelling', category: 'Sea',     distance: 'Boat from Matemwe', img: exteriorPoolView },
+  { title: 'Stone Town',               category: 'Culture', distance: '1 h drive',         img: exteriorEntrance },
+  { title: 'Jozani Forest',            category: 'Nature',  distance: '40 min drive',      img: exteriorPoolForest },
+  { title: 'Spice Farms',              category: 'Culture', distance: '50 min drive',      img: livingKitchen },
+  { title: 'Safari Blue',              category: 'Sea',     distance: 'Full day from Fumba', img: exteriorPoolPalms },
+  { title: 'Kuza Cave',                category: 'Nature',  distance: '10 min drive',      img: livingNook },
+  { title: 'Paje & Kite Beach',        category: 'Beach',   distance: '15 min drive',      img: exteriorPoolLoungers },
+  { title: 'The Rock Restaurant',      category: 'Food',    distance: '5 min walk',        img: exteriorSunset },
 ]
 
-function PopularExperiences() {
+function AreaAttractions() {
   const scrollRef = useRef(null)
 
   return (
@@ -378,11 +388,14 @@ function PopularExperiences() {
       <div className="max-w-[1440px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
           <div>
-            <p className="section-eyebrow">Things to Do</p>
-            <h2 className="section-title">Experiences worth having</h2>
+            <p className="section-eyebrow">Around the Villas</p>
+            <h2 className="section-title">What's nearby</h2>
+            <p className="font-body text-base text-ocean/50 mt-2 max-w-lg">
+              Jambiani sits within easy reach of Zanzibar's most loved corners — from coral atolls to Stone Town's spice-scented alleys.
+            </p>
           </div>
           <Link to="/experiences" className="text-sm font-medium text-coral hover:text-coral-dark transition-colors mt-4 md:mt-0">
-            View all experiences &rarr;
+            View all attractions &rarr;
           </Link>
         </div>
 
@@ -390,35 +403,33 @@ function PopularExperiences() {
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-5 px-5 md:mx-0 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible"
         >
-          {experiences.map((exp, i) => (
+          {attractions.map((att, i) => (
             <Link
               to="/experiences"
-              key={exp.title}
+              key={att.title}
               className={`reveal reveal-delay-${(i % 4) + 1} flex-shrink-0 w-[280px] md:w-auto group`}
             >
               <div className="relative rounded-frame overflow-hidden shadow-card card-hover">
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
-                    src={exp.img}
-                    alt={exp.title}
+                    src={att.img}
+                    alt={att.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-card-overlay" />
                 </div>
                 <span className="absolute top-4 left-4 px-3 py-1 bg-coral/90 text-white text-[10px] font-semibold tracking-wide uppercase rounded-pill">
-                  {exp.category}
+                  {att.category}
                 </span>
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display text-xl font-semibold text-white mb-2">{exp.title}</h3>
-                  <div className="flex items-center justify-between text-xs text-white/60">
-                    <span className="flex items-center gap-1">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {exp.duration}
-                    </span>
-                    <span className="text-white font-medium text-sm">From ${exp.price}</span>
+                  <h3 className="font-display text-xl font-semibold text-white mb-2">{att.title}</h3>
+                  <div className="flex items-center text-xs text-white/70">
+                    <svg className="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    {att.distance}
                   </div>
                 </div>
               </div>
@@ -431,107 +442,94 @@ function PopularExperiences() {
 }
 
 /* ═══════════════════════════════════════════
-   TESTIMONIALS
+   TESTIMONIALS — real guest reviews
    ═══════════════════════════════════════════ */
 const testimonials = [
   {
-    quote: 'Zanzibar exceeded every expectation. The villa was breathtaking, the concierge knew exactly what we needed before we even asked. This wasn\'t a trip — it was a transformation.',
-    name: 'Sophie Laurent',
-    from: 'Paris, France',
-    trip: 'Honeymoon',
+    title: 'A quiet, private location — the best choice',
+    quote: 'Absolutely superb. We found at the location exactly what we saw in the photos. The villa is a 2-minute walk from the ocean, an oasis of peace surrounded by palm trees. Nothing but praise for our host, who surprised us with breakfast served on the terrace.',
+    name: 'Vasile',
+    from: 'Family with young children',
+    source: 'Agoda · May 2026',
     rating: 5,
   },
   {
-    quote: 'I\'ve traveled to 40+ countries. Zanzibar, through this platform, was the first time I felt truly taken care of. The spice tour alone changed how I think about food.',
-    name: 'Marcus Webb',
-    from: 'London, UK',
-    trip: 'Solo Adventure',
+    title: 'A small corner of paradise',
+    quote: 'We only spent two days here, but honestly I felt I was in a small corner of paradise. Mornings with the view of the palms, coffee sipped in front of the huge windows, the private pool — all unforgettable.',
+    name: 'RamonAly',
+    from: 'Solo traveler · Italy',
+    source: 'Agoda · Apr 2026',
     rating: 5,
   },
   {
-    quote: 'Our family holiday was seamless from start to finish. The kids still talk about swimming with dolphins at Mnemba. We\'re already planning our return.',
-    name: 'Elena & David Rossi',
-    from: 'Milan, Italy',
-    trip: 'Family Holiday',
-    rating: 5,
-  },
-  {
-    quote: 'The attention to detail is remarkable. From the airport pickup to the private sunset cruise — every moment felt personal and thoughtful.',
-    name: 'James & Anna Chen',
-    from: 'New York, USA',
-    trip: 'Anniversary',
+    title: 'Everything was as in the pictures',
+    quote: 'The house was clean, a very relaxing and very quiet place. The pool is perfect to be in at any time. It\'s close to the ocean and there are many activities to do. Everything was as in the pictures and did not disappoint. I will definitely return!',
+    name: 'Simao',
+    from: 'Business traveler · Portugal',
+    source: 'Agoda · May 2026',
     rating: 5,
   },
 ]
 
 function Testimonials() {
-  const [active, setActive] = useState(0)
-  const intervalRef = useRef(null)
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % testimonials.length)
-    }, 6000)
-    return () => clearInterval(intervalRef.current)
-  }, [])
-
-  const goTo = (idx) => {
-    setActive(idx)
-    clearInterval(intervalRef.current)
-    intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % testimonials.length)
-    }, 6000)
-  }
-
   return (
-    <section className="bg-midnight py-20 md:py-32 px-5 md:px-10 lg:px-20 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-10 left-10 w-64 h-64 bg-coral/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-seafoam/5 rounded-full blur-3xl" />
+    <section className="bg-midnight py-20 md:py-28 px-5 md:px-10 lg:px-20 relative overflow-hidden">
+      {/* Soft accent glows */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-seafoam/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-spice/10 rounded-full blur-3xl" />
 
-      <div className="max-w-4xl mx-auto text-center relative z-10 reveal">
-        {/* Large quote mark */}
-        <span className="font-display text-[120px] md:text-[160px] text-coral/20 leading-none block -mb-16 md:-mb-20 select-none">
-          &ldquo;
-        </span>
-
-        <div className="relative min-h-[200px] md:min-h-[180px]">
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 transition-all duration-700 ${
-                i === active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-              }`}
-            >
-              <blockquote className="font-display text-xl md:text-2xl lg:text-3xl italic text-ivory leading-relaxed font-light">
-                {t.quote}
-              </blockquote>
-              <div className="mt-8">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <svg key={j} className="w-4 h-4 text-spice" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="font-body text-sm font-medium text-white">{t.name}</p>
-                <p className="font-body text-xs text-white/40">{t.from} &middot; {t.trip}</p>
-              </div>
-            </div>
-          ))}
+      <div className="max-w-[1440px] mx-auto relative z-10">
+        <div className="text-center mb-14 md:mb-16 reveal">
+          <p className="font-body text-xs md:text-sm font-semibold tracking-[0.4em] uppercase text-sand mb-4">
+            Guest Reviews
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-tight">
+            Five stars, every stay.
+          </h2>
+          <div className="flex items-center justify-center gap-1 mt-5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg key={i} className="w-5 h-5 text-spice" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+            <span className="font-display text-white ml-3 text-lg">5.0</span>
+            <span className="text-white/40 text-sm ml-1">· verified on Agoda &amp; Booking</span>
+          </div>
         </div>
 
-        {/* Dots */}
-        <div className="flex items-center justify-center gap-2 mt-12">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === active ? 'bg-coral w-6' : 'bg-white/20 hover:bg-white/40'
-              }`}
-              aria-label={`Go to testimonial ${i + 1}`}
-            />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {testimonials.map((t, i) => (
+            <article
+              key={t.name}
+              className={`reveal reveal-delay-${i + 1} relative bg-white/[0.04] border border-white/10 rounded-frame p-7 md:p-8
+                hover:bg-white/[0.07] hover:border-white/20 transition-all duration-500 flex flex-col`}
+            >
+              {/* Decorative quote */}
+              <span aria-hidden="true" className="absolute -top-4 -left-2 font-display text-7xl text-spice/30 leading-none select-none">
+                &ldquo;
+              </span>
+
+              <div className="flex items-center gap-0.5 mb-5 relative z-10">
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <svg key={j} className="w-4 h-4 text-spice" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+
+              <h3 className="font-display text-xl md:text-2xl text-white italic leading-snug mb-4">
+                {t.title}
+              </h3>
+              <blockquote className="font-body text-sm md:text-base text-white/60 leading-relaxed mb-6 flex-1">
+                {t.quote}
+              </blockquote>
+
+              <div className="pt-5 border-t border-white/10">
+                <p className="font-body text-sm font-medium text-white">{t.name}</p>
+                <p className="font-body text-xs text-white/40 mt-0.5">{t.from}</p>
+                <p className="font-body text-[11px] uppercase tracking-wider text-spice/70 mt-2">{t.source}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -666,37 +664,115 @@ function FeaturedVillas() {
 }
 
 /* ═══════════════════════════════════════════
-   ZANZIBAR GUIDE CTA
+   RESERVE CTA — final call to action
    ═══════════════════════════════════════════ */
-function GuideCta() {
+function ReserveCta() {
   return (
-    <section className="relative overflow-hidden reveal">
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
-        <div className="relative">
-          <img
-            src={livingStairs}
-            alt="Bahari Mirror interior"
-            className="w-full h-full object-cover min-h-[300px]"
-            loading="lazy"
-          />
-        </div>
-        <div className="bg-ocean flex items-center p-10 md:p-16 lg:p-24">
-          <div>
-            <p className="section-eyebrow !text-seafoam">Travel Guide</p>
-            <h2 className="font-display text-3xl md:text-4xl text-white mb-4">
-              Your essential Zanzibar guide
-            </h2>
-            <p className="font-body text-base text-white/50 leading-relaxed mb-8 max-w-md">
-              Everything you need to know before you go — from the best months to visit and what to pack,
-              to local customs and hidden gems the guidebooks miss.
-            </p>
-            <Link to="#" className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-white/30 text-white text-sm font-semibold rounded-pill
-              hover:bg-white hover:text-ocean transition-all duration-300">
-              Read the Guide
+    <section className="relative overflow-hidden">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <img
+          src={exteriorSunset}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight/90 via-midnight/75 to-midnight/60" />
+      </div>
+
+      <div className="relative z-10 max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 py-20 md:py-32 reveal">
+        <div className="max-w-2xl">
+          <p className="font-body text-xs md:text-sm font-semibold tracking-[0.4em] uppercase text-sand mb-5">
+            Reserve your stay
+          </p>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] mb-6">
+            Mornings that begin slowly. Evenings that don't end.
+          </h2>
+          <p className="font-body text-base md:text-lg text-white/70 leading-relaxed mb-10 max-w-xl">
+            Check live availability for Emozia and Soul Rise, or get in touch
+            and we'll match you with the right villa for your dates.
+          </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Link to="/properties" className="btn-primary !py-4 !px-10 !text-sm">
+              Browse Villas
+            </Link>
+            <a
+              href="mailto:office@BahariMirror.com"
+              className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/30 text-white text-sm font-semibold rounded-pill
+                hover:bg-white hover:text-ocean hover:border-white transition-all duration-300"
+            >
+              Inquire by Email
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </Link>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT US — editorial intro
+   ═══════════════════════════════════════════ */
+function AboutUs() {
+  return (
+    <section className="section-padding bg-ivory">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          {/* Gallery — left, 7 cols */}
+          <div className="lg:col-span-7 reveal">
+            <div className="grid grid-cols-6 grid-rows-6 gap-3 md:gap-4 h-[420px] md:h-[560px]">
+              <div className="col-span-4 row-span-4 rounded-frame overflow-hidden shadow-card">
+                <img src={exteriorHero} alt="Bahari Mirror exterior" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="col-span-2 row-span-3 col-start-5 row-start-1 rounded-frame overflow-hidden shadow-card">
+                <img src={livingHero} alt="Living space" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="col-span-2 row-span-3 col-start-5 row-start-4 rounded-frame overflow-hidden shadow-card">
+                <img src={bedroomHero} alt="Bedroom" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="col-span-4 row-span-2 col-start-1 row-start-5 rounded-frame overflow-hidden shadow-card">
+                <img src={exteriorPoolPalms} alt="Pool and palms" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+            </div>
+          </div>
+
+          {/* Text — right, 5 cols */}
+          <div className="lg:col-span-5 reveal reveal-delay-2">
+            <p className="section-eyebrow">About Bahari Mirror</p>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ocean leading-[1.1] mb-6">
+              A reflection of the island, in five quiet villas.
+            </h2>
+            <p className="font-body text-base md:text-lg text-ocean/60 leading-relaxed mb-5">
+              Bahari Mirror is a small, family-stewarded collection of villas in
+              Jambiani — on Zanzibar's south-east coast, just 200 metres from
+              the beach. Each home is built around its own private pool and
+              garden, shaped by Swahili craft, and run with the quiet attention
+              you'd offer a guest in your own home.
+            </p>
+            <p className="font-body text-base text-ocean/50 leading-relaxed">
+              Five villas, similar in spirit, each with its own character —
+              chosen for travellers who prefer stillness, space, and the rhythm
+              of the ocean a short walk away.
+            </p>
+
+            <div className="grid grid-cols-3 gap-4 md:gap-6 mt-10 pt-10 border-t border-sand/50">
+              <div>
+                <p className="font-display text-3xl md:text-4xl text-ocean">5</p>
+                <p className="font-body text-[11px] uppercase tracking-[0.2em] text-ocean/50 mt-2">Villas</p>
+              </div>
+              <div>
+                <p className="font-display text-3xl md:text-4xl text-ocean">200m</p>
+                <p className="font-body text-[11px] uppercase tracking-[0.2em] text-ocean/50 mt-2">to Beach</p>
+              </div>
+              <div>
+                <p className="font-display text-3xl md:text-4xl text-ocean">5<span className="text-spice">★</span></p>
+                <p className="font-body text-[11px] uppercase tracking-[0.2em] text-ocean/50 mt-2">Guest Rated</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -712,12 +788,12 @@ export default function Home() {
     <>
       <Hero />
       <TrustBar />
-      <FeaturedDestinations />
-      <WhyZanzibar />
-      <PopularExperiences />
-      <Testimonials />
+      <AboutUs />
       <FeaturedVillas />
-      <GuideCta />
+      <WhyZanzibar />
+      <AreaAttractions />
+      <Testimonials />
+      <ReserveCta />
     </>
   )
 }
