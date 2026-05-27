@@ -86,10 +86,10 @@ function Hero() {
       {/* Hero Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-5 text-center">
         <p
-          className={`font-body text-xs font-semibold tracking-[0.25em] uppercase text-seafoam mb-6
+          className={`font-body text-xs md:text-sm font-semibold tracking-[0.4em] uppercase text-sand mb-6
             transition-all duration-700 delay-300 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
-          Discover Zanzibar
+          Reflections of Zanzibar
         </p>
         <h1
           className={`font-display text-hero text-white max-w-4xl mb-6 text-balance

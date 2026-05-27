@@ -4,18 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        sand: '#F2E4C8',
-        ocean: { DEFAULT: '#1A4A5A', light: '#256B80' },
-        coral: { DEFAULT: '#E8704A', dark: '#D4593A' },
-        spice: '#C8952A',
-        seafoam: '#A8D5C2',
-        ivory: '#FDFAF4',
-        midnight: '#0D2B38',
-        timber: '#8B5E3C',
+        // Bahari Mirror brand palette
+        // #0E3D4A deep teal · #1E7C86 medium teal · #D4A76A gold
+        // #E8C37A light gold · #F7F3EC ivory
+        ocean: { DEFAULT: '#0E3D4A', light: '#1E7C86' },
+        midnight: '#0E3D4A',
+        seafoam: '#1E7C86',
+        coral: { DEFAULT: '#D4A76A', dark: '#B8893E' },
+        spice: '#D4A76A',
+        sand: '#E8C37A',
+        ivory: '#F7F3EC',
+        timber: '#B8893E',
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Cinzel', '"Trajan Pro"', 'Georgia', 'serif'],
+        body: ['Montserrat', 'Lato', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'hero': ['clamp(3rem, 6vw, 6rem)', { lineHeight: '1.05', fontWeight: '300' }],
@@ -30,10 +33,10 @@ export default {
         'frame': '20px',
       },
       boxShadow: {
-        'card': '0 8px 40px rgba(13,43,56,0.12)',
-        'card-hover': '0 16px 56px rgba(13,43,56,0.18)',
-        'nav': '0 2px 20px rgba(13,43,56,0.08)',
-        'widget': '0 24px 80px rgba(13,43,56,0.2)',
+        'card': '0 8px 40px rgba(14,61,74,0.12)',
+        'card-hover': '0 16px 56px rgba(14,61,74,0.18)',
+        'nav': '0 2px 20px rgba(14,61,74,0.08)',
+        'widget': '0 24px 80px rgba(14,61,74,0.2)',
       },
       spacing: {
         '18': '4.5rem',
@@ -71,9 +74,9 @@ export default {
         },
       },
       backgroundImage: {
-        'cta-gradient': 'linear-gradient(135deg, #E8704A 0%, #C8952A 100%)',
-        'hero-overlay': 'linear-gradient(180deg, rgba(13,43,56,0.0) 0%, rgba(13,43,56,0.75) 100%)',
-        'card-overlay': 'linear-gradient(180deg, transparent 40%, rgba(13,43,56,0.85) 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #D4A76A 0%, #B8893E 100%)',
+        'hero-overlay': 'linear-gradient(180deg, rgba(14,61,74,0.0) 0%, rgba(14,61,74,0.75) 100%)',
+        'card-overlay': 'linear-gradient(180deg, transparent 40%, rgba(14,61,74,0.85) 100%)',
       },
     },
   },

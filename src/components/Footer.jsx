@@ -48,8 +48,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {/* Brand Story */}
           <div>
-            <Link to="/" className="font-display text-3xl font-light text-white block mb-4">
-              Bahari Mirror
+            <Link to="/" className="inline-block mb-4" aria-label="Bahari Mirror — home">
+              <img
+                src="/bahari-mirror-logo.png"
+                alt="Bahari Mirror Zanzibar Vilas"
+                className="h-14 w-auto [filter:brightness(0)_invert(1)] opacity-90"
+              />
             </Link>
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
               Born from a love of the island and its people, we curate authentic Zanzibar experiences

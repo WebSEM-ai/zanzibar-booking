@@ -34,7 +34,7 @@ export default function Navbar() {
     : 'bg-transparent'
 
   const textColor = scrolled || !isHome ? 'text-ocean' : 'text-white'
-  const logoColor = scrolled || !isHome ? 'text-ocean' : 'text-white'
+  const onLight = scrolled || !isHome
 
   return (
     <>
@@ -42,8 +42,13 @@ export default function Navbar() {
         <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className={`font-display text-2xl md:text-3xl font-light tracking-wide ${logoColor} transition-colors duration-300`}>
-              Bahari Mirror
+            <Link to="/" className="flex items-center" aria-label="Bahari Mirror — home">
+              <img
+                src="/bahari-mirror-logo.png"
+                alt="Bahari Mirror Zanzibar Vilas"
+                className={`h-12 md:h-16 w-auto transition-all duration-300
+                  ${onLight ? '' : '[filter:brightness(0)_invert(1)] opacity-95'}`}
+              />
             </Link>
 
             {/* Desktop Nav */}
